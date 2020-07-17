@@ -1,0 +1,11 @@
+resources:
+- type: storage.v1.bucket
+  name: coffeetime-dev-cloudresume
+  properties:
+    storageClass: REGIONAL
+    location: us-east1
+    iamConfiguration:
+      uniformBucketLevelAccess:
+        enabled: true
+    labels:
+      app: cloudresume

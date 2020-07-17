@@ -1,0 +1,5 @@
+steps:
+# Deploy
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Deploy the cloudresume infra
+  args: ['deployment-manager', 'deployments', 'update', 'cloudresume', '--config', 'deployment-manager/cloudresume.yaml', '--labels', 'app=cloudresume']
