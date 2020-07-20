@@ -111,6 +111,7 @@ resources:
 - name: cloudresume-visitor-count
   type: gcp-types/cloudfunctions-v1:projects.locations.functions
   properties:
+    parent: projects/coffeetime-dev-282015/locations/us-east1
     entryPoint: visitor_count
     runtime: python37
     sourceArchiveUrl: $(ref.coffeetime-dev-cloudresume-functions.name)/visitor_count.zip
