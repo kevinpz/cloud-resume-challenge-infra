@@ -13,7 +13,13 @@ steps:
 # Push the cloud function code
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
   id: Push the cloud function code to a bucket
-  args: ['bash', '-c', 'scripts/send_python.sh']
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |-
+      apt install -y zip
+      zip -r visitor_count.zip scripts/visitor_count
+      gsutil cp visitor_count.zip gs://coffeetime-dev-cloudresume-functions
 
 # Deploy
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
