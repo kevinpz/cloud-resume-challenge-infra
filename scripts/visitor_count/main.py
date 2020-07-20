@@ -57,7 +57,7 @@ def visitor_count(request):  # pylint: disable=unused-argument
     current_visitor = str(int(visitor_nb + 1))
     save_task_data(current_visitor)
     client_data = {
-        'current_visitor': current_visitor
+        'currentVisitor': current_visitor
     }
 
     return client_data

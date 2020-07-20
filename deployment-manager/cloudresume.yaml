@@ -106,3 +106,23 @@ resources:
         enabled: true
     labels:
       app: cloudresume
+
+# Deploy the cloudfunction
+- name: cloudresume-visitor-count
+  type: gcp-types/cloudfunctions-v1:projects.locations.functions
+  properties:
+    entryPoint: visitor_count
+    runtime: python37
+    sourceArchiveUrl: $(ref.coffeetime-dev-cloudresume-functions.name)/visitor_count.zip
+    maxInstances: 1
+    availableMemoryMb: 128MB
+    timeout: 1s
+    httpsTrigger: {}
+
+# Allow everyone to execute the function
+- name: cloudresume-public-execution
+  type: gcp-types/cloudfunctions-v1:virtual.projects.locations.functions.iamMemberBinding
+  properties:
+    resource: $(ref.cloudresume-visitor-count.name)
+    member: allUsers
+    role: roles/cloudfunctions.invoker
