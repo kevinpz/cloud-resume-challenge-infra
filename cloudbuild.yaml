@@ -18,8 +18,9 @@ steps:
     - '-c'
     - |-
       apt install -y zip
-      zip -r visitor_count.zip scripts/visitor_count
-      gsutil cp visitor_count.zip gs://coffeetime-dev-cloudresume-functions
+      cd scripts/visitor_count
+      zip -r ../visitor_count.zip .
+      gsutil cp ../visitor_count.zip gs://coffeetime-dev-cloudresume-functions
 
 # Deploy
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
