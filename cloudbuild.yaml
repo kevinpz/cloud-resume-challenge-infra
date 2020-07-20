@@ -2,6 +2,7 @@ steps:
 # Pylint check
 - name: 'python:3'
   id: Check the python package
+  entrypoint: 'bash'
   args: ['bash', '-c', 'scripts/check_python.sh']
 
 # Push the cloud function code
