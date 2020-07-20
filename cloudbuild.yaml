@@ -1,6 +1,6 @@
 steps:
 # Pylint check
-- name: 'mirror.gcr.io/python:3'
+- name: 'python:3'
   id: Check the python package
   args: ['bash', '-c', 'scripts/check_python.sh']
 
