@@ -115,7 +115,7 @@ resources:
     parent: projects/coffeetime-dev-282015/locations/us-east1
     entryPoint: visitor_count
     runtime: python37
-    sourceArchiveUrl: $(ref.coffeetime-dev-cloudresume-functions.name)/visitor_count.zip
+    sourceArchiveUrl: gs://$(ref.coffeetime-dev-cloudresume-functions.name)/visitor_count.zip
     maxInstances: 1
     availableMemoryMb: 128
     timeout: 1s
