@@ -24,4 +24,4 @@ steps:
 # Deploy
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
   id: Deploy the cloudresume infra
-  args: ['deployment-manager', 'deployments', 'update', 'cloudresume', '--config', 'deployment-manager/cloudresume.yaml']
+  args: ['gcloud', 'deployment-manager', 'deployments', 'update', 'cloudresume', '--config', 'deployment-manager/cloudresume.yaml']
