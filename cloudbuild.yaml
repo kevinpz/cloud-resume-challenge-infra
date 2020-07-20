@@ -2,8 +2,13 @@ steps:
 # Pylint check
 - name: 'python:3'
   id: Check the python package
-  entrypoint: 'ls'
-  args: ['-la', 'scripts']
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |-
+      pip install pylint
+      pip install -r visitor_count/requirements.txt
+      pylint visitor_count/
 
 # Push the cloud function code
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
