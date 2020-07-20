@@ -1,5 +1,15 @@
 steps:
+# Pylint check
+- name: 'mirror.gcr.io/python:3'
+  id: Check the python package
+  args: ['bash', '-c', 'scripts/check_python.sh']
+
+# Push the cloud function code
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
+  id: Push the cloud function code to a bucket
+  args: ['bash', '-c', 'scripts/send_python.sh']
+
 # Deploy
-- name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
   id: Deploy the cloudresume infra
   args: ['deployment-manager', 'deployments', 'update', 'cloudresume', '--config', 'deployment-manager/cloudresume.yaml']
