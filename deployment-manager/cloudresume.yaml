@@ -117,7 +117,7 @@ resources:
     runtime: python37
     sourceArchiveUrl: $(ref.coffeetime-dev-cloudresume-functions.name)/visitor_count.zip
     maxInstances: 1
-    availableMemoryMb: 128MB
+    availableMemoryMb: 128
     timeout: 1s
     httpsTrigger: {}
 
