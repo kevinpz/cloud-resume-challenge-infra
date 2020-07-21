@@ -12,7 +12,7 @@ steps:
 
 # Deploy
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
-  id: Push the cloud function code to a bucket
+  id: Deploy the infrastructure
   entrypoint: 'bash'
   args:
     - '-c'
@@ -20,6 +20,8 @@ steps:
       apt install -y zip
       pushd scripts/visitor_count
       zip -r ../visitor_count.zip .
-      gsutil cp ../visitor_count.zip gs://coffeetime-dev-cloudresume-functions
+      cd ..
+      file_name=visitor_count_$(md5sum visitor_count.zip).zip
+      gsutil cp visitor_count.zip gs://coffeetime-dev-cloudresume-functions/${file_name}
       popd
-      gcloud deployment-manager deployments update cloudresume --config deployment-manager/cloudresume.yaml
+      gcloud deployment-manager deployments update cloudresume --config deployment-manager/cloudresume.yaml --properties function_file:${file_name}
