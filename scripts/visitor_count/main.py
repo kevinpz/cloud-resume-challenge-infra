@@ -54,9 +54,9 @@ def visitor_count(request):  # pylint: disable=unused-argument
     :return: the current visitor number
     """
     current_visitor = 0
-    # visitor_nb = get_visitor_count()
-    # current_visitor = str(int(visitor_nb + 1))
-    # save_task_data(current_visitor)
+    visitor_nb = get_visitor_count()
+    current_visitor = str(int(visitor_nb + 1))
+    save_task_data(current_visitor)
     client_data = {
         'currentVisitor': current_visitor
     }

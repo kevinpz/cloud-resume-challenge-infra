@@ -116,15 +116,15 @@ resources:
     entryPoint: visitor_count
     runtime: python37
     sourceArchiveUrl: gs://$(ref.coffeetime-dev-cloudresume-functions.name)/visitor_count.zip
-    maxInstances: 1
+    maxInstances: 10
     availableMemoryMb: 128
-    timeout: 1s
+    timeout: 3s
     httpsTrigger: {}
 
 # Allow everyone to execute the function
-#- name: cloudresume-public-execution
-#  type: gcp-types/cloudfunctions-v1:virtual.projects.locations.functions.iamMemberBinding
-#  properties:
-#    resource: $(ref.cloudresume-visitor-count.name)
-#    member: allUsers
-#    role: roles/cloudfunctions.invoker
+- name: cloudresume-public-execution
+  type: gcp-types/cloudfunctions-v1:virtual.projects.locations.functions.iamMemberBinding
+  properties:
+    resource: $(ref.cloudresume-visitor-count.name)
+    member: allUsers
+    role: roles/cloudfunctions.invoker

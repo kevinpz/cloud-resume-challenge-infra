@@ -10,7 +10,7 @@ steps:
       pip install -r scripts/visitor_count/requirements.txt
       pylint scripts/
 
-# Push the cloud function code
+# Deploy
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
   id: Push the cloud function code to a bucket
   entrypoint: 'bash'
@@ -18,11 +18,8 @@ steps:
     - '-c'
     - |-
       apt install -y zip
-      cd scripts/visitor_count
+      pushd scripts/visitor_count
       zip -r ../visitor_count.zip .
       gsutil cp ../visitor_count.zip gs://coffeetime-dev-cloudresume-functions
-
-# Deploy
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:latest'
-  id: Deploy the cloudresume infra
-  args: ['gcloud', 'deployment-manager', 'deployments', 'update', 'cloudresume', '--config', 'deployment-manager/cloudresume.yaml']
+      popd
+      gcloud deployment-manager deployments update cloudresume --config deployment-manager/cloudresume.yaml
