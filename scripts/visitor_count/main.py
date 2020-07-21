@@ -7,6 +7,7 @@ import os
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+from flask import jsonify
 
 # Init firebase connection
 cred = credentials.ApplicationDefault()
@@ -29,7 +30,7 @@ def get_visitor_count():
     # If the documents exists
     if doc.exists:
         # Get the last number of visitor
-        visitor_nb = doc.to_dict()['count']
+        visitor_nb = int(doc.to_dict()['count'])
 
     return visitor_nb
 
@@ -53,12 +54,11 @@ def visitor_count(request):  # pylint: disable=unused-argument
     :param request: the client request
     :return: the current visitor number
     """
-    current_visitor = 0
     visitor_nb = get_visitor_count()
-    current_visitor = str(int(visitor_nb + 1))
+    current_visitor = str(visitor_nb + 1)
     save_task_data(current_visitor)
     client_data = {
         'currentVisitor': current_visitor
     }
 
-    return client_data
+    return jsonify(client_data)
