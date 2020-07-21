@@ -21,7 +21,8 @@ steps:
       pushd scripts/visitor_count
       zip -r ../visitor_count.zip .
       cd ..
-      file_name=visitor_count_$(md5sum visitor_count.zip).zip
-      gsutil cp visitor_count.zip gs://coffeetime-dev-cloudresume-functions/${file_name}
+      file_name="visitor_count_$(md5sum visitor_count.zip | awk '{print $1}').zip"
+      mv visitor_count.zip ${file_name}
+      gsutil cp ${file_name} gs://coffeetime-dev-cloudresume-functions
       popd
       gcloud deployment-manager deployments update cloudresume --config deployment-manager/cloudresume.yaml --properties function_file:${file_name}
