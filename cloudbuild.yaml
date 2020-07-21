@@ -25,4 +25,5 @@ steps:
       mv visitor_count.zip ${file_name}
       gsutil cp ${file_name} gs://coffeetime-dev-cloudresume-functions
       popd
-      gcloud deployment-manager deployments update cloudresume --config deployment-manager/cloudresume.yaml --properties function_file:${file_name}
+      gcloud deployment-manager deployments update cloudresume --template deployment-manager/cloudresume.jinja \
+          --properties function_file:${file_name},region:us-east1

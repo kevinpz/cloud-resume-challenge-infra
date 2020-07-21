@@ -1,9 +1,0 @@
-imports:
-- path: cloudresume.jinja
-
-resources:
-- name: deploy-all-infra
-  type: cloudresume.jinja
-  properties:
-     region: us-east1
-     : changed_when_deploying
