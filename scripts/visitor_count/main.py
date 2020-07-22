@@ -35,7 +35,7 @@ def get_visitor_count():
     return visitor_nb
 
 
-def save_task_data(visitor_nb):
+def save_visitor_data(visitor_nb):
     """
     Save the number of visitors to Firestore
 
@@ -45,7 +45,7 @@ def save_task_data(visitor_nb):
     visitor_ref = database.collection(u'cloudresume').document(u'visitor_count')
 
     # Write the new number of visitors
-    visitor_ref.set({'count': visitor_nb}, merge=True)
+    visitor_ref.set({'count': visitor_nb})
 
 
 def visitor_count(request):  # pylint: disable=unused-argument
@@ -56,7 +56,7 @@ def visitor_count(request):  # pylint: disable=unused-argument
     """
     visitor_nb = get_visitor_count()
     current_visitor = str(visitor_nb + 1)
-    save_task_data(current_visitor)
+    save_visitor_data(current_visitor)
     client_data = {
         'currentVisitor': current_visitor
     }
