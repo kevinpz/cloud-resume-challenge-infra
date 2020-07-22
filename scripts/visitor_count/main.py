@@ -60,5 +60,8 @@ def visitor_count(request):  # pylint: disable=unused-argument
     client_data = {
         'currentVisitor': current_visitor
     }
+    headers = {
+        'Access-Control-Allow-Origin': '*'
+    }
 
-    return jsonify(client_data)
+    return jsonify(client_data), 200, headers
