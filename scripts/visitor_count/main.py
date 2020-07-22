@@ -2,18 +2,8 @@
 Visitor count
 """
 
-import os
-
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
 from flask import jsonify
-
-# Init firebase connection
-cred = credentials.ApplicationDefault()
-firebase_admin.initialize_app(cred, {
-    'projectId': os.environ['GCP_PROJECT'],
-})
+from google.cloud import firestore
 
 
 def get_visitor_count():
@@ -22,7 +12,7 @@ def get_visitor_count():
 
     :return: the number of visitor
     """
-    database = firestore.client()
+    database = firestore.Client()
     visitor_nb = 0
     # Get the document
     visitor_ref = database.collection(u'cloudresume').document(u'visitor_count')
@@ -41,7 +31,7 @@ def save_visitor_data(visitor_nb):
 
     :param visitor_nb: number of visitor
     """
-    database = firestore.client()
+    database = firestore.Client()
     visitor_ref = database.collection(u'cloudresume').document(u'visitor_count')
 
     # Write the new number of visitors
